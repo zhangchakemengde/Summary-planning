@@ -1,0 +1,12 @@
+[1] Kang S H,Koo D H,Kang W H, et al. A case for flash memory ssd in hadoop applications. International Journal of Control and Automation. 2013
+[2] He Yongqiang,Lee Rubao,Huai Yin,Shao Zheng,Jain Namit,Zhang Xiaodong,Xu Zhiwei.RCFile:A fast and space-efficient data placement structure in MapReduce-based warehouse systems.Proceedings of the 24th International Conference on Data Engineering (ICDE.11). 2011
+[3] Lee S W, Park D J, Chung T S, Lee D H, Park S, Song H J. A log buffer-based flash translation layer using fully-asso-ciative sector translation. ACM Transactions on Embedded Computing Systems (TECS), 2007,6(3):18
+[4] Park D, Debnath B,Du D. CFTL: A convertible flash translation layer adaptive to data access patterns//Proceedings of the ACM SIGMETRICS International Conference on Measurement and Modeling of Computer Systems. New York, USA, 2010:365-366
+[5] Ma D,Feng J, Li G. Lazyftl: A page-level flash translation layer optimized for nand flash memory//Proceedings of the 2011 International Confernence on Management of Data(SIGMOD11). Athens,Greece, 2011:1-121
+[6] Cheong S K, Jeong J J,Jeong Y W, Ko D S,Lee Y H. Research on the I/O performance advancement of a low speed HDD using DDR-SSD. Communications in Computer and Information Science, 2011,184(2):508-513
+[7] Canim M, Mihaila G A, Bhattacharjee B, Ross K A, Lang C A. SSD bufferpool extensions for database systems. Proceedings of the VLDB Endowment, 2010,3(1-2):1435-1446
+[8] Soundararaian G, Prabhakaran V, Balakrishnan M, Wobber T. Extending SSD lifetimes with disk-based write caches//Proceedings of the 8th USENIX Conference on File and Storage Technologies(FAST'10). Berkeley, USA,2010:8-8
+[9] Corporation I. Understanding the flash translation layer (FTL) specification [EB/OL]. http://www.embeddedfreebsd.org/Documents/Intel-FTL.pdf, 2011.
+[10] chen F, Koufaty D A, Zhang X. Hystor: making the best use of solid state drives in high performance storage systems [A]. Proceedings of the International Conference on Supercomputing [C], New York, USA: ACM, 2011:22-32
+[11] Blktrance [EB/OL]. http://linux.die.net/man/8/blktrance, 2011.
+[12] Apache Hadoop. http://hadoop.apache.org . 2015

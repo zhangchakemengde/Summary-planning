@@ -1,0 +1,104 @@
+算法3. 倾向算法.
+trendCalculate(Page pg)
+1. flag←true//the flag of whether trend is reduced;
+2. q←1-(pg.lr+lg.lw)/pg.totalaccess;
+3. 	   //calculate the I/O cost on SSD and HDD
+4. ssdcost←(pg.lr.q+pg.pr).rs+
+5.	    (pg.lw.q+pg.pw).ws;
+6. hddcost←(pg.lr.q+pg.pr).rh+
+7.	    (pg.lw.q+pg.pw).wh;
+8.	   //calculate the trend and its reduce
+9. if pg.state=hot then
+10.   if pg.changeFlag=true then
+11.	 pg.trend←(ssdcost-hddcost)+
+12.		   pg.pretrend;
+13. 	 pg.pretrend←pg.trend.β;
+14.	 pg.changeFlag←false;flag←true;
+15.   else
+16.	 pg.trend←(ssdcost-hddcost)+
+17.		   pg.pretrend;
+18.	 flag←false;
+19.   endif
+20. else if pg.state=warm then
+21.   pg.trend←(ssdcost-hddcost)+
+22.		pg.pretrend;
+23.   flag←false;
+24. else if pg.state=cold then
+25.   if pg.changeFlag=true then
+26.	 pg.trend←(ssdcost-hddcost)+
+27.		   pg.pretrend;
+28.	 pg.pretrend←pg.trend.β;
+29.	 pg.changeFlag←false;flag←true;
+30.   else
+31.	 interval←pg.cold2-pg.cold1;
+32.	 if interval/ssdSize<hddSize/ssdSize then
+33.	    pg.trend←(ssdcost-hddcost)+
+34.		      pg.pretrend;
+35.	    flag←false;
+36.	 else
+37.	    pg.pretrend←pg.trend.β.
+38.			 (ssdSize/interval);
+39.	    pg.trend←(ssdcost-hddcost);
+40.	    flag←true;
+41.	 end if
+42.   end if
+43. end if
+44. //reset the counter
+45. if flag=true then
+46.    pg.lr←0;pg.lw←0;pg.pr←0;pg.pw←0;
+47. end if
+48. if |pg.trend|>ws+wh and pg.trend<0 then
+49.    return SSD-trend;
+50. else if |pg.trend|>ws+wk and pg.trend>0
+51.    return HDD-trend;
+52. else
+53.    return pg.placement;
+54. end if
+算法4. 混合存储算法.
+accessPage(Page pg)
+1. pg.totalaccess++;
+2. if pg is found in buffer then
+3.    move pg to the head of buffer LRU;
+4.    if access is read quest then
+5.       pg.lr++;
+6.    else if access if write quest then
+7.       pg.lw++;
+8.    end if
+9. else
+10.   if buffer is full then
+11.      evictPage();
+12.   end if
+13.   fetch pg from disk;
+14.   updateState(pg);
+15.   add pg to the head of buffer LRU;
+16.   if access is read quest then
+17.      pg.pr++;
+18.   else access is write quest then
+19.      pg.pw++;
+20.   end if
+21. end if
+算法5. evictPage().
+1. Page pg;
+2. pg←tail of LRU;
+3. place←trendCalculate(pg);
+4. if pg is on HDD then
+5.    if pg.state is hot or warm and place=SSD-trend
+6.       migratePage(pg);
+7.    end if
+8. else if pg is on SSD then
+9.   if place = SSD-trend then
+10.             migratePage(pg);
+11.  else if pg is cold and SSD write performance is
+12.         beyond HDD then
+13.  end if
+14. end if
+15. if pg is dirty then
+16.    write pg to disk of pg.placement;
+17. end if 
+
+
+
+
+
+
+
